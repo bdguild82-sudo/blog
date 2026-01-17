@@ -1,198 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Xama Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>XamaHub Demo</title>
 
 <style>
-:root {
-  --bg: #060b1a;
-  --glass: rgba(255,255,255,0.08);
-  --border: rgba(255,255,255,0.15);
-  --blue: #4cc9ff;
-  --purple: #7a5cff;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #0b1430, #040814);
-  color: white;
-  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: #0a0f25;
+  color: #eee;
 }
-
 header {
-  padding: 20px 40px;
-  font-size: 22px;
-  font-weight: bold;
-  background: linear-gradient(90deg, #0b1430, transparent);
-}
-
-.container {
-  padding: 30px;
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 30px;
-}
-
-.sidebar {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 18px;
   padding: 20px;
-  backdrop-filter: blur(16px);
-}
-
-.sidebar button {
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 14px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(135deg, var(--blue), var(--purple));
-  color: black;
+  text-align: center;
+  font-size: 26px;
   font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s;
+  background: #09102a;
 }
-
-.sidebar button:hover {
-  transform: scale(1.04);
-}
-
-.main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+nav {
+  display: flex;
+  justify-content: center;
   gap: 20px;
-}
-
-.card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 24px;
-  backdrop-filter: blur(18px);
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-.card h2 {
-  margin: 0 0 10px;
-}
-
-.points {
-  font-size: 42px;
-  font-weight: bold;
-  color: var(--blue);
-}
-
-.progress {
-  height: 10px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.1);
-  overflow: hidden;
   margin-top: 10px;
 }
-
-.progress span {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, var(--blue), var(--purple));
-  width: 0%;
-  transition: width 0.4s;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
+nav button {
+  padding: 10px 18px;
   border: none;
-  margin-top: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  background: linear-gradient(90deg,#00baff,#7a5cff);
+  color: #000;
+  font-weight: 600;
+  transition: .2s;
 }
-
-.notice {
-  font-size: 13px;
-  opacity: 0.7;
-  margin-top: 10px;
+nav button:hover {
+  transform: scale(1.05);
+}
+section.hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+.hero h1 {
+  font-size: 48px;
+  margin: 10px 0;
+}
+.hero p {
+  font-size: 18px;
+  opacity: .8;
+}
+.btn-main {
+  margin-top: 24px;
+  padding: 14px 28px;
+  font-size: 18px;
+  background: linear-gradient(90deg,#7a5cff,#00baff);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #000;
+  transition: .2s;
+}
+.btn-main:hover {
+  transform: scale(1.06);
+}
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 40px 10px;
+}
+.card {
+  background: #101633;
+  padding: 24px;
+  margin: 12px;
+  border-radius: 16px;
+  width: 260px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0,200,255,.15);
+}
+.card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 18px rgba(0,200,255,.25);
+}
+footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  opacity: .7;
+  background: #09102a;
 }
 </style>
 </head>
 
 <body>
 
-<header>❄️ Xama Points Dashboard</header>
+<header>XamaHub Demo</header>
+<nav>
+  <button onclick="alert('Login form coming soon')">Login</button>
+  <button onclick="alert('Register form coming soon')">Register</button>
+</nav>
 
-<div class="container">
+<section class="hero">
+  <h1>Welcome to XamaHub</h1>
+  <p>Earn Xama Points and grow your rewards!</p>
+  <button class="btn-main" onclick="earn()">Earn Points</button>
+  <div id="pointDisplay" style="margin-top:15px;font-size:24px;font-weight:bold">Points: 0</div>
+</section>
 
-  <div class="sidebar">
-    <button onclick="earn()">➕ Earn Points</button>
-    <button onclick="withdraw()">🏧 Withdraw</button>
-    <button onclick="alert('Coming soon')">⚙️ Settings</button>
+<section class="features">
+  <div class="card">
+    <h3>Games</h3>
+    <p>Track & play games</p>
   </div>
-
-  <div class="main">
-
-    <div class="card">
-      <h2>Your Balance</h2>
-      <div class="points"><span id="points">0</span> XP</div>
-      <div class="progress">
-        <span id="bar"></span>
-      </div>
-      <div class="notice">100 XP required to withdraw</div>
-    </div>
-
-    <div class="card">
-      <h2>Roblox Account</h2>
-      <input placeholder="Enter Roblox username" />
-      <div class="notice">We never ask for passwords.</div>
-    </div>
-
-    <div class="card">
-      <h2>Withdraw Status</h2>
-      <p id="status">❌ Not eligible yet</p>
-      <div class="notice">
-        Withdrawals will use legit Roblox systems (gamepasses / groups).
-      </div>
-    </div>
-
+  <div class="card">
+    <h3>Tasks</h3>
+    <p>Complete tasks</p>
   </div>
-</div>
+  <div class="card">
+    <h3>Stats</h3>
+    <p>Your dashboard</p>
+  </div>
+</section>
+
+<footer>
+  Links • About • Privacy • Contact
+</footer>
 
 <script>
 let points = 0;
-
 function earn() {
-  const gain = Math.floor(Math.random() * 6) + 5;
-  points += gain;
-  update();
-}
-
-function update() {
-  document.getElementById("points").innerText = points;
-  const percent = Math.min(points, 100);
-  document.getElementById("bar").style.width = percent + "%";
-
-  document.getElementById("status").innerText =
-    points >= 100 ? "✅ Eligible to withdraw" : "❌ Not eligible yet";
-}
-
-function withdraw() {
-  if (points < 100) {
-    alert("You need at least 100 Xama Points.");
-    return;
-  }
-  alert(
-    "Withdrawals will be enabled once a legit Roblox earning method is connected."
-  );
+  points += Math.floor(Math.random() * 10) + 5;
+  document.getElementById("pointDisplay").innerText = "Points: " + points;
 }
 </script>
 
