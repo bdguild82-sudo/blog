@@ -1,140 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>XamaHub Demo</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>XamaHub</title>
 
 <style>
+/* Basic reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Full background image */
 body {
-  margin: 0;
+  background-image: url("https://bloxdrop.com/_next/image?url=%2Fimages%2Fhome%2Fdeposit.png&w=1920&q=75");
+  background-size: cover; /* make full screen */
+  background-position: center;
   font-family: "Segoe UI", sans-serif;
-  background: #0a0f25;
-  color: #eee;
-}
-header {
-  padding: 20px;
-  text-align: center;
-  font-size: 26px;
-  font-weight: bold;
-  background: #09102a;
-}
-nav {
+  color: #fff;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-top: 10px;
+  align-items: center;
 }
-nav button {
-  padding: 10px 18px;
+
+/* Container */
+.container { text-align: center; backdrop-filter: blur(8px); background: rgba(0,0,0,0.5); padding: 40px; border-radius: 20px; animation: fadeIn .8s ease; width: 90%; max-width: 400px; }
+
+/* Card animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Input & button */
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
-  background: linear-gradient(90deg,#00baff,#7a5cff);
-  color: #000;
-  font-weight: 600;
-  transition: .2s;
+  font-size: 16px;
 }
-nav button:hover {
-  transform: scale(1.05);
-}
-section.hero {
-  text-align: center;
-  padding: 60px 20px;
-}
-.hero h1 {
-  font-size: 48px;
-  margin: 10px 0;
-}
-.hero p {
-  font-size: 18px;
-  opacity: .8;
-}
-.btn-main {
-  margin-top: 24px;
+button {
   padding: 14px 28px;
-  font-size: 18px;
-  background: linear-gradient(90deg,#7a5cff,#00baff);
+  background: linear-gradient(90deg, #7a5cff, #00baff);
   border: none;
   border-radius: 12px;
-  cursor: pointer;
+  font-size: 18px;
   font-weight: bold;
-  color: #000;
-  transition: .2s;
+  cursor: pointer;
+  color: black;
+  transition: transform .2s;
 }
-.btn-main:hover {
-  transform: scale(1.06);
-}
-.features {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 40px 10px;
-}
-.card {
-  background: #101633;
-  padding: 24px;
-  margin: 12px;
-  border-radius: 16px;
-  width: 260px;
-  text-align: center;
-  box-shadow: 0 0 12px rgba(0,200,255,.15);
-}
-.card:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 18px rgba(0,200,255,.25);
-}
-footer {
-  padding: 20px;
-  text-align: center;
-  font-size: 14px;
-  opacity: .7;
-  background: #09102a;
-}
-</style>
-</head>
+button:hover { transform: scale(1.05); }
 
+/* Hidden sections */
+.hidden { display: none; }
+</style>
+
+</head>
 <body>
 
-<header>XamaHub Demo</header>
-<nav>
-  <button onclick="alert('Login form coming soon')">Login</button>
-  <button onclick="alert('Register form coming soon')">Register</button>
-</nav>
-
-<section class="hero">
+<!-- SIGN UP PAGE -->
+<div id="signup" class="container">
   <h1>Welcome to XamaHub</h1>
-  <p>Earn Xama Points and grow your rewards!</p>
-  <button class="btn-main" onclick="earn()">Earn Points</button>
-  <div id="pointDisplay" style="margin-top:15px;font-size:24px;font-weight:bold">Points: 0</div>
-</section>
+  <p>Enter your Roblox username</p>
+  <input id="username" type="text" placeholder="Roblox Username" />
 
-<section class="features">
-  <div class="card">
-    <h3>Games</h3>
-    <p>Track & play games</p>
-  </div>
-  <div class="card">
-    <h3>Tasks</h3>
-    <p>Complete tasks</p>
-  </div>
-  <div class="card">
-    <h3>Stats</h3>
-    <p>Your dashboard</p>
-  </div>
-</section>
+  <button onclick="submitUsername()">Sign Up</button>
+  <p style="font-size:13px; opacity:0.8; margin-top:10px;">We never ask for passwords or personal info.</p>
+</div>
 
-<footer>
-  Links • About • Privacy • Contact
-</footer>
+<!-- MAIN DASHBOARD (hidden until signup) -->
+<div id="dashboard" class="container hidden">
+  <h1>Hello, <span id="nameDisplay"></span> 👋</h1>
+  <p>This is your dashboard.</p>
+  <p>More features coming soon!</p>
+
+  <button onclick="alert('Soon!')">Go to Features</button>
+</div>
 
 <script>
-let points = 0;
-function earn() {
-  points += Math.floor(Math.random() * 10) + 5;
-  document.getElementById("pointDisplay").innerText = "Points: " + points;
+function submitUsername() {
+  const user = document.getElementById("username").value.trim();
+  if (!user) {
+    alert("Please enter a valid Roblox username.");
+    return;
+  }
+  document.getElementById("nameDisplay").innerText = user;
+  document.getElementById("signup").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
 }
 </script>
 
